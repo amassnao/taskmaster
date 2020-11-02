@@ -1,0 +1,35 @@
+[
+    "hello",
+    {
+        "command": "/bin/ls",
+        "nprocess": "1",
+        "startup": "no",
+        "output": "1",
+        "error": "2",
+        "umask": null,
+        "restart": "never",
+        "returncode": "0",
+        "starttime": "1",
+        "stoptime": "1",
+        "attempts": "0",
+        "stopsignal": "2",
+        "environment": null,
+        "directory": null
+    },
+    {
+        "command": "/bin/ls",
+        "nprocess": "1",
+        "startup": "no",
+        "output": "1",
+        "error": "2",
+        "umask": null,
+        "restart": "never",
+        "returncode": "0",
+        "starttime": "1",
+        "stoptime": "1",
+        "attempts": "0",
+        "stopsignal": "2",
+        "environment": null,
+        "directory": null
+    }
+]
