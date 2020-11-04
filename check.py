@@ -16,8 +16,8 @@ def is_valid_file(file):
                 for key in keys:
                     if key not in expectedKeys:
                         raise ValueError(F'allowed keys {expectedKeys}')
-                if len(keys) != len(expectedKeys):
-                    raise ValueError(F'number of keys must be equal to {len(keys)}')
+                #if len(keys) != len(expectedKeys):
+                #    raise ValueError(F'number of keys must be equal to {len(keys)}')
         return configurations
 
 def is_key_exists(data, key, message):
@@ -29,3 +29,15 @@ def is_file_exists(file):
     if not path.exists(file):
         raise ValueError('File Not Found')
 
+def is_valid_return_codes(returncodes):
+    returncodes = returncodes.split(',')
+    for code in returncodes:
+        if not code.isnumeric():
+            raise ValueError(F'Invalid Return Code')
+
+def is_valid_environment(environment):
+    environment = environment.split(',')
+    for keyval in environment:
+        key_val = keyval.split('=')
+        if len(key_val) != 2:
+            raise ValueError(F'Invalid Environment Format')
