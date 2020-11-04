@@ -12,7 +12,7 @@ def is_valid_file(file):
                 raise ValueError('elements must be type of dict')
             else:
                 keys = configuration.keys()
-                expectedKeys = ["command", "nprocess", "startup", "output", "error", "umask", "restart", "returncode", "starttime", "stoptime", "attempts", "stopsignal", "environment", "directory"]
+                expectedKeys = ["command", "nprocess", "startup", "output", "error", "umask", "restart", "returncodes", "starttime", "stoptime", "attempts", "stopsignal", "environment", "directory"]
                 for key in keys:
                     if key not in expectedKeys:
                         raise ValueError(F'allowed keys {expectedKeys}')

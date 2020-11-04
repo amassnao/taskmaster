@@ -11,6 +11,7 @@ def clean_options(options):
     configuration = vars(options)
     file = options.configurationfile
     show = options.show
+    options.returncodes = options.returncodes.split(',')
     surround_exit(lambda : is_key_exists(configuration, 'configurationfile', '-c configurationfile'))
     del configuration['configurationfile']
     del configuration['show']

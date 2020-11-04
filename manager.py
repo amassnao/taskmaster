@@ -25,13 +25,14 @@ def manage_configuration_file(standalone=None):
     parser.add_option('-E', '--error', default='2', dest='error', help='standard error redirect file', metavar='FILE')
     parser.add_option('-U', '--umask', default=None, dest='umask', help='umask to set before launching the program', metavar='NUMBER')
     parser.add_option('--restart', default='never', dest='restart', help='should Restarted', metavar='always/never/unexpcted_exit')
-    parser.add_option('--returncode', default='0', dest='returncode', help='return code represent expected exit', metavar='NUMBER')
+    parser.add_option('--returncodes', default='0', dest='returncodes', help='return code represent expected exit', metavar='NUMBER, NUMBER,...')
     parser.add_option('--starttime', default='1', dest='starttime', help='time to consider successfully started in seconds', metavar='SECONDS')
     parser.add_option('--stoptime', default='1', dest='stoptime', help='time to consider successfully stopped in seconds', metavar='SECONDS')
     parser.add_option('--attempts', default='0', dest='attempts', help='restart attempts before aborted', metavar='NUMBER')
     parser.add_option('--stopsignal', default='2', dest='stopsignal', help='signal to stop program', metavar='NUMBER')
     parser.add_option('--environment', default=None, dest='environment', help='environment variables', metavar='STRING')
     parser.add_option('--directory', default=None, dest='directory', help='working directory', metavar='STRING')
+    
     (options, _) = parser.parse_args()
     (file, mustShow, configuration) = clean_options(options)
 
