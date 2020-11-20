@@ -6,11 +6,14 @@ from kk import message
 from clss import jobs , program , node
 from subprocess import Popen , check_output
 from collections import defaultdict
+import socket
+from config import HOST, PORT, read, write
+from switch import Switch
+import sys
 
-
-def load_file():
+def load_file(name_file):
     job = jobs()
-    with open("config.json") as json_data_file:
+    with open(name_file) as json_data_file:
         data = json.load(json_data_file)
         keys = list(data.keys())
         for key in keys:
@@ -46,20 +49,55 @@ def trait_data_json(file):
     pass
 
 
+def get_pid(conn):
+    write(conn, F"{os.getpid()}")
+
+def stop_proccess(jobs, name):
+    
+    pass
+
+def start_proccess(jobs, name):
+    
+    pass
+
+def send_signal(jobs, sig):
+    pass
+
+def status(jobs):
+    pass
+
 def main():
-    jobs = load_file()
-    print(jobs.names)
-    print("name command=",jobs.list_jobs['ls'].info_process.name)
+    try:
+        server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        server.bind((HOST, PORT))
+    except OSError as e:
+        print(e)
+        exit(1)
+
+    jobs = load_file(sys.argv[1])
     run_all_jobs(jobs)
 
     while True:
-        handler_signal()
-        if exec.global_signal > -1:
-            print("nbr_signalmain=", exec.dic_signal[exec.global_signal])
-        line=input()
-        if line == "exit":
-            sys.exit()
-        print(line)
+        server.listen()
+        conn, _ = server.accept()
+        req = read(conn).split(' ')
+        switch = Switch()
+        switch.add_case(lambda : req[0] == 'getpid', lambda : get_pid(conn))
+        switch.add_case(lambda : req[0] == 'stop', lambda : stop_proccess(jobs, req[1]))
+        switch.add_case(lambda : req[0] == 'start', lambda : start_proccess(jobs, req[1]))
+        switch.add_case(lambda : req[0] == 'signal', lambda : send_signal(jobs, req[1]))
+        switch.add_case(lambda : req[0] == 'status', lambda : status(jobs))
+        switch.add_case(lambda : req[0] == 'close', lambda : exit(0))
+        switch.switch()
+        conn.close()
+
+        #handler_signal()
+        #if exec.global_signal > -1:
+        #    print("nbr_signalmain=", exec.dic_signal[exec.global_signal])
+        #line=input()
+        #if line == "exit":
+        #    sys.exit()
+        #print(line)
 
 
 

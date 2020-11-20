@@ -44,3 +44,4 @@ def manage_configuration_file(standalone=None):
 
 if __name__ == '__main__':
     manage_configuration_file()
+

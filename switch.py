@@ -1,6 +1,7 @@
 class Switch():
 
-    cases = []
+    def __init__(self):
+        self.cases = []
 
     def add_case(self, test, execute):
         self.cases.append((test, execute))

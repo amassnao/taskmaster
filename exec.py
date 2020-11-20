@@ -33,11 +33,12 @@ def my_process(program):
    # os.chdir("/tmp/")#(program.workingdir)
     with open(program.stdout,'a') as out, open(program.stderr, 'a') as err:
         cmd_args = program.cmd.split()
+        print("args", cmd_args)
         #if program.starttime  > 0:
         sleep(2)
         print("print arg cmd", cmd_args)
         env_new = ENV(program.env)
-        out_cmd = Popen(cmd_args, stdout=out,stderr=err,shell=True,cwd=program.workingdir, env=env_new)
+        out_cmd = Popen(program.cmd, stdout=out,stderr=err,shell=True,cwd=program.workingdir, env=env_new)
         #mkdir and touch does not work in the same subprocess  preexec_fn=initchildproc::::;
         # umask=program.umask)
         program.pid=os.getpid()
@@ -85,3 +86,5 @@ def run_all_jobs(jobs):
 
         #thread(my_job,[program]).start()
         #Timer(program.starttime, my_job,[p1rogram]).start()
+
+
