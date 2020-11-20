@@ -52,6 +52,20 @@ def start_process(name):
     else:
         print(stop)
 
+def shell():
+    res = send_command("status")
+    if not res:
+        print("server not running")
+    while res:
+        cmd = input("$> ").split()
+        switch = Switch()
+        switch.add_case(lambda : cmd[0] == 'exit', lambda : exit(0))
+        switch.add_case(lambda : cmd[0] == 'status', status)
+        switch.add_case(lambda : cmd[0] == 'start', lambda : start_process(cmd[1]))
+        switch.add_case(lambda : cmd[0] == 'stop', lambda : stop_process(cmd[1]))
+        switch.switch()
+
+
 parser = OptionParser()
 
 parser.add_option('--create', dest='create', action='store_true', help="create configuration file", default=False)
@@ -60,6 +74,7 @@ parser.add_option('--stopserver', dest='stopserver', action='store_true', help="
 parser.add_option('--status', dest='status', action='store_true', help='show list of process', default=False)
 parser.add_option('--stop', dest='stopprocess', default=False, help='stop proccess', metavar='COMMAND')
 parser.add_option('--start', dest='startprocess', default=False, help='start proccess', metavar='COMMAND')
+parser.add_option('--shell', dest="shell", action='store_true', help='start a stable shell', default=False)
 
 
 if '--create' in sys.argv:
@@ -75,6 +90,7 @@ switch.add_case(lambda : options.stopserver, stop_server)
 switch.add_case(lambda : options.status, status)
 switch.add_case(lambda : options.stopprocess, lambda : stop_process(options.stopprocess))
 switch.add_case(lambda : options.startprocess, lambda : start_process(options.startprocess))
+switch.add_case(lambda : options.shell, shell)
 
 switch.switch()
 

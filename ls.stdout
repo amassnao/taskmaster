@@ -25,3 +25,12 @@ drwx------  3 amassnao  wheel   96 Nov 20 20:19 com.apple.launchd.1UnWx4jOG7
 drwx------  3 amassnao  wheel   96 Nov 20 20:19 com.apple.launchd.4TYJcaRY0Y
 drwxr-xr-x@ 4 amassnao  wheel  128 Nov 20 20:19 com.google.Keystone
 -rw-r--r--  1 root      wheel   48 Nov 20 20:37 last_fs_sync
+total 16
+drwxrwxrwt  8 root      wheel  256 Nov 20 20:19 .
+drwxr-xr-x  6 root      wheel  192 Oct 11 19:54 ..
+-rw-------  1 root      wheel   23 Nov 20 20:57 .ifstats
+srwxr-xr-x  1 amassnao  wheel    0 Nov 20 20:19 Unity-hubIPCService.sock
+drwx------  3 amassnao  wheel   96 Nov 20 20:19 com.apple.launchd.1UnWx4jOG7
+drwx------  3 amassnao  wheel   96 Nov 20 20:19 com.apple.launchd.4TYJcaRY0Y
+drwxr-xr-x@ 4 amassnao  wheel  128 Nov 20 20:19 com.google.Keystone
+-rw-r--r--  1 root      wheel   48 Nov 20 20:58 last_fs_sync

@@ -21,7 +21,7 @@ def load_file(name_file):
         print("load_file",job.names)
         for name in job.names:
             job.list_jobs[name]= node(name, get_setting_program(data[name], name))
-    print("___", job.names);
+    print("___", job.names)
     return job
 
 
