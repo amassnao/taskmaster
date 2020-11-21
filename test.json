@@ -1,0 +1,18 @@
+{
+    "rm": {
+        "cmd": "/bin/ls",
+        "exitcodes": [
+            1,
+            2,
+            3
+        ]
+    },
+    "ls": {
+        "cmd": "/bin/ls",
+        "exitcodes": [
+            1,
+            2,
+            3
+        ]
+    }
+}

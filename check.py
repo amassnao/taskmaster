@@ -1,24 +1,54 @@
 
 import json
 from os import path
+from jsonschema import Draft7Validator, ValidationError
+import sys
+import pkgutil
+
+fileSchema = {
+    'type': 'object',
+    'additionalProperties': {
+        'type': 'object',
+        'properties' : {
+            'cmd': {'type': 'string'},
+            'workingdir': {'type': 'dir'},
+            'autostart' : {'type': 'boolean'},
+            'autorestart': {'type': 'boolean'},
+            'exitcodes': {
+                'type': 'array',
+                'items': {'type': 'integer'}
+            },
+            'startretries': {'type': 'integer'},
+            'starttime': {'type': 'integer'},
+            'stopsignal': {
+                'type': 'array',
+                'items': {
+                    "type": "string",
+                    "enum": ['SIGINT', 'SIGHUB', 'SIGILL', 'SIGQUIT', 'SIGTRAP', 'SIGABRT', 'SIGBUS', 'SIGFPE', 'SIGKILL', 'SIGUSR1', 'SIGUSR2', 'SIGPIPE', 'SIGALRM', 'SIGTERM']
+                }
+            },
+            'stoptime': {'type': 'integer'},
+            "stdout": {'type': 'string'},
+            "stderr": {'type': 'string'},
+        },
+        'additionalProperties': False
+    }
+}
+
+
+def is_dir(checker, instance):
+    return isinstance(instance, str) and path.isdir(instance)
+
 
 def is_valid_file(file):
     with open(file, 'r') as configurationfile:
         configurations = json.load(configurationfile)
-        if not isinstance(configurations, list):
-            raise ValueError('file must contain list []')
-        for configuration in configurations:
-            if not isinstance(configuration, dict):
-                raise ValueError('elements must be type of dict')
-            else:
-                keys = configuration.keys()
-                expectedKeys = ["command", "nprocess", "startup", "output", "error", "umask", "restart", "returncodes", "starttime", "stoptime", "attempts", "stopsignal", "environment", "directory"]
-                for key in keys:
-                    if key not in expectedKeys:
-                        raise ValueError(F'allowed keys {expectedKeys}')
-                #if len(keys) != len(expectedKeys):
-                #    raise ValueError(F'number of keys must be equal to {len(keys)}')
-        return configurations
+        try:
+            Draft7Validator.TYPE_CHECKER = Draft7Validator.TYPE_CHECKER.redefine_many({'dir': is_dir})
+            Draft7Validator(fileSchema).validate(instance=configurations)
+            return configurations
+        except ValidationError as e:
+            print(e)
 
 def is_key_exists(data, key, message):
     if key not in data.keys() or not data[key]:
@@ -41,3 +71,7 @@ def is_valid_environment(environment):
         key_val = keyval.split('=')
         if len(key_val) != 2:
             raise ValueError(F'Invalid Environment Format')
+
+if __name__ == '__main__':
+    if sys.argv[1]:
+        is_valid_file(sys.argv[1])
