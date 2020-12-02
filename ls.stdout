@@ -34,3 +34,13 @@ drwx------  3 amassnao  wheel   96 Nov 20 20:19 com.apple.launchd.1UnWx4jOG7
 drwx------  3 amassnao  wheel   96 Nov 20 20:19 com.apple.launchd.4TYJcaRY0Y
 drwxr-xr-x@ 4 amassnao  wheel  128 Nov 20 20:19 com.google.Keystone
 -rw-r--r--  1 root      wheel   48 Nov 20 20:58 last_fs_sync
+total 16
+drwxrwxrwt  9 root      wheel  288 Dec  2 10:44 .
+drwxr-xr-x  6 root      wheel  192 Oct 11 19:54 ..
+-rw-------  1 root      wheel   23 Dec  2 10:48 .ifstats
+drwx------  4 amassnao  wheel  128 Dec  2 10:03 .vbox-amassnao-ipc
+srwxr-xr-x  1 amassnao  wheel    0 Dec  2 10:02 Unity-hubIPCService.sock
+drwx------  3 amassnao  wheel   96 Dec  2 10:02 com.apple.launchd.CSlFiLhatS
+drwx------  3 amassnao  wheel   96 Dec  2 10:02 com.apple.launchd.UuYDAgsgm6
+drwxr-xr-x@ 4 amassnao  wheel  128 Dec  2 10:03 com.google.Keystone
+-rw-r--r--  1 root      wheel   48 Dec  2 10:46 last_fs_sync

@@ -52,6 +52,16 @@ def start_process(name):
     else:
         print(stop)
 
+def help(cmd):
+    if cmd != 'help':
+        print("unknown command!\nplease use one of the commands listed bellow")
+    print("\thelp   :", "show help menu")
+    print("\tstart  :", "start proccess")
+    print("\tstop   :", "stop proccess")
+    print("\tstatus :", "show list of process with status")
+    print("\texit   :", "exit from shell")
+
+
 def shell():
     res = send_command("status")
     if not res:
@@ -59,10 +69,12 @@ def shell():
     while res:
         cmd = input("$> ").split()
         switch = Switch()
-        switch.add_case(lambda : cmd[0] == 'exit', lambda : exit(0))
-        switch.add_case(lambda : cmd[0] == 'status', status)
-        switch.add_case(lambda : cmd[0] == 'start', lambda : start_process(cmd[1]))
-        switch.add_case(lambda : cmd[0] == 'stop', lambda : stop_process(cmd[1]))
+        switch.add_case(lambda : len(cmd) == 1 and cmd[0] == 'exit', lambda : exit(0))
+        switch.add_case(lambda : len(cmd) == 1 and cmd[0] == 'status', status)
+        switch.add_case(lambda : len(cmd) == 2 and cmd[0] == 'start', lambda : start_process(cmd[1]))
+        switch.add_case(lambda : len(cmd) == 2 and cmd[0] == 'stop', lambda : stop_process(cmd[1]))
+        switch.add_case(lambda : len(cmd) == 2 and cmd[0] == 'exit', lambda : exit(0))
+        switch.add_case(lambda : len(cmd) == 1, lambda : help(cmd[0]))
         switch.switch()
 
 

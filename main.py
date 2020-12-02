@@ -61,9 +61,11 @@ def start_proccess(jobs, name):
     pass
 
 def send_signal(jobs, sig):
+
     pass
 
 def status(jobs):
+    
     pass
 
 def main():

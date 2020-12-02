@@ -1,0 +1,18 @@
+
+{
+    "ls": {
+                "cmd":"ls -la",
+                "umask":0,
+                "workingdir":"/tmp/",
+                "autostart":true,
+                "autorestart": false,
+                "exitcodes":[0,2],
+                "startretries": 1,
+                "starttime": 3,
+                "stopsignal":["SIGINT"],
+                "stoptime": 10,
+                "stdout": "ls.stdout",
+                "stderr": "ls.stderr",
+                "env":[]
+            }
+}
